@@ -1,8 +1,6 @@
 package com.example.krestikinoliki;
 
-import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -77,8 +75,7 @@ public class HelloController {
 
     void resetGame() {
         for (Node node : gridPane.getChildren()) {
-            if (node instanceof Button) {
-                Button button = (Button) node;
+            if (node instanceof Button button) {
                 button.setText("");
             }
         }
