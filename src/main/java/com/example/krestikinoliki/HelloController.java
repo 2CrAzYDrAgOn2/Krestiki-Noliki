@@ -1,6 +1,7 @@
 package com.example.krestikinoliki;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,22 +16,16 @@ public class HelloController {
     @FXML
     private GridPane gridPane;
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
     private char nowSym = 'x';
 
-    private char gameField[][] = new char[3][3];
+    private final char[][] gameField = new char[3][3];
 
     private boolean isGame = true;
 
     @FXML
     void BtnClick(ActionEvent event) {
         Button btn = (Button)event.getSource();
-        if(!isGame || btn.getText() != "") return;
+        if(!isGame || !Objects.equals(btn.getText(), "")) return;
         int rowIndex = GridPane.getRowIndex(btn) == null ? 0 : GridPane.getRowIndex(btn);
         int columnIndex = GridPane.getColumnIndex(btn) == null ? 0 : GridPane.getColumnIndex(btn);
         gameField[rowIndex][columnIndex] = nowSym;
@@ -54,8 +49,6 @@ public class HelloController {
         } else if(checkForDraw()){
             showDrawDialog();
         }
-        System.out.println(rowIndex);
-        System.out.println(columnIndex);
         nowSym = nowSym == 'x' ? '0' : 'x';
     }
 
@@ -71,7 +64,7 @@ public class HelloController {
     }
 
     void showWinnerDialog(String symbol) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "У нас есть победитель " + symbol + "", ButtonType.OK);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "У нас есть победитель " + symbol, ButtonType.OK);
         alert.showAndWait();
         resetGame();
     }
